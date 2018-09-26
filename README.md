@@ -1,32 +1,177 @@
-# Object Orientation
 
-## Overview
+# Creating Functions
 
-We'll introduce the concept of Object Oriented Programming (OOP)
+## Introduction
+As we learn to accomplish more and more with our code, we want the ability to reuse our code to help us solve different problems. Functions allow us to do just that. They also also give us the ability to name a sequence of operations (or block of code), thus making our code expressive. Let's see how this works, and why something like this is useful.
 
-## Object-Oriented Programming (OOP)
+## Objectives
+You will be able to:
+* Create and use your own custom functions
 
-*An object-oriented approach to application development makes programs more intuitive to design, faster to develop, more amenable to modification, and easier to understand.*  
-—[*Object-Oriented Programming with Objective-C*][apple_oop_guide_intro], Apple Inc.
+### Our problem so far 
 
-[apple_oop_guide_intro]: https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/OOP_ObjC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005149-CH1-SW2
+Imagine that we have a group of employees who have just joined our company.  
 
-It's natural to wonder, "how can a string of ones and zeroes be referred to as an 'object'?" The use of the word "object" is an abstraction of thought. An "object" in code has no more physical form than does a word in any human language. Sure, words have physical representations: speaking a word causes air to vibrate in a sound wave, ink on a page can be shaped into symbols that represent the word, a meaning can be pointed at or mimed out; but none of these are the word itself. Human language is a system of abstraction: it communicates the *idea* of a thing, but not the thing itself.
 
-![](https://upload.wikimedia.org/wikipedia/en/b/b9/MagrittePipe.jpg)  
-Translation: "This is not a pipe." - [*The Treachery of Images*](https://en.wikipedia.org/wiki/The_Treachery_of_Images), [René Magritte](https://en.wikipedia.org/wiki/Ren%C3%A9_Magritte), 1927  
+```python
+new_employees = ['jim', 'tracy', 'lisa']
+```
 
-This image of a pipe is no more a pipe than the word "pipe" is a pipe; in the same way, a code object named `pipe` is not a pipe, but only another form of representing a pipe.
+> Press shift + enter to run this code.
 
->As humans, we’re constantly faced with myriad facts and impressions that we must make sense of. To do so, we must abstract underlying structure away from surface details and discover the fundamental relations at work. Abstractions reveal causes and effects, expose patterns and frameworks, and separate what’s important from what’s not. Object orientation provides an abstraction of the data on which you operate; moreover, it provides a concrete grouping between the data and the operations you can perform with the data—in effect giving the data behavior.  
->—[*Object-Oriented Programming with Objective-C*](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/OOP_ObjC/Articles/ooOOP.html#//apple_ref/doc/uid/TP40005149-CH8-SW3), Apple Inc.
+We want to send each of them a nice welcoming message.  We could use a `for` loop to create a list of `welcome_messages`.
 
-A code object representing a water pipe (instead of a smoking pipe) might contain values for `length`, `diameter`, `material`, and `manufacturer`. The bundling of these individual pieces of information together begins to form a larger whole.
 
-Object-Oriented Programming, however, does more than just bundle up individual pieces of data that represent a "thing" — it also bundles customized functions that can be performed *on* that data. These are called **methods**: behaviors that an object performs upon its internal data and even upon other code objects.
+```python
+welcome_messages = []
+for new_employee in new_employees:
+    welcome_messages.append("Hi " + new_employee.title() + ", I'm so glad to be working with you!" )
 
-An object in code is a thing with all the data and all the logic required to complete a task. Objects are models and metaphors for the problems we solve in code.
+welcome_messages
+```
 
-Object-oriented programming was born from the trend of making digital lives reflect our real lives. In the 1970's, [Adele Goldberg](https://en.wikipedia.org/wiki/Adele_Goldberg_%28computer_scientist%29) and [Alan Kay](https://en.wikipedia.org/wiki/Alan_Kay) developed an object-oriented language at Xerox PARC called SmallTalk, which was used in the first personal computer.
+Then a couple of weeks later, a few more employees join, and we want to send messages to them as well.
 
-Python comes with a few types of Objects to get us started, things like `int` for Integer, `str` for String, `list` for List, etc. We call these base types of Objects "Primitives." But what if we wanted to create a new type in our programming universe, a new kind of object for our code? That's what the `class` keyword and object orientation allows us to do.
+
+```python
+new_employees = ['steven', 'jan', 'meryl']
+```
+
+Well to accomplish welcoming the new employees, we would likely copy our code from above.
+
+
+```python
+welcome_messages = []
+for new_employee in new_employees:
+    welcome_messages.append("Hi " + new_employee.title() + ", I'm so glad to be working with you!" )
+    
+welcome_messages
+```
+
+If each time we wanted to reuse code we needed to copy and paste the code, we would have to maintain a lot more code than is necessary.  Also, each time we recopied it is another opportunity to make a mistake.  So what if there was a way to write that code just one time, yet be able to execute that code wherever and whenever we want?  Functions allow us to do just that.
+
+Here is that same code wrapped in a function.
+
+
+```python
+def greet_employees():
+    welcome_messages = []
+    for new_employee in new_employees:
+        welcome_messages.append("Hi " + new_employee.title() + ", I'm so glad to be working with you!" )
+
+    return welcome_messages
+```
+
+
+```python
+greet_employees()
+```
+
+> Make sure to press shift + enter for the two cells above.
+
+There are two steps to using a function: defining a function and executing a function.  Defining a function happens first, and afterwards when we call `greet_employees()` we execute the function.   
+
+
+```python
+new_employees = ['Jan', 'Joe', 'Avi']
+greet_employees()
+```
+
+Ok let's break down how to define, or declare, a function.  Executing a function is fairly simple, just type the function's name followed by parentheses.
+
+
+```python
+greet_employees()
+```
+
+### Declaring and using functions
+
+There are two components to declaring a function: the function signature and the function body.
+
+
+```python
+def name_of_function(): # signature
+    words = 'function body' # body
+    print(words) # body
+```
+
+#### Function Signature
+
+The function signature is the first line of the function.  It follows the pattern of `def`, `function name`, `parentheses`, `colon`.
+
+`def name_of_function():`
+
+The `def` is there to tell Python that you are about to declare a function.  The name of the function indicates how to reference and execute the function later.  The colon is to end the function signature and indicate that the body of the function is next.  The parentheses are important as well, and we'll explain their use in a later lesson.
+
+#### Function Body
+
+The body of the function is what the function does.  This is the code that runs each time we execute the function.  We indicate that we are writing the function body by going to the next line and indenting after the colon.  To complete the function body we stop indenting.  
+
+
+```python
+def name_of_function(): 
+    words = 'function body' # function body
+    print(words) # function body    
+# no longer part of the function body
+```
+
+Let's execute the `name_of_function` function.
+
+
+```python
+name_of_function()
+```
+
+> Press shift + enter
+
+Did it work?  Kinda.  The lines of our function were run.  But our function did not return anything.  Functions are designed so that everything inside of them stay inside.  So for example, even though we declared the `words` variable, `words` is not available from outside of the function.
+
+
+```python
+words
+```
+
+To get something out of the function, we must use the `return` keyword, followed by what we would like to return.  Let's declare another function called `other_function` that has a body which is exactly the same, but has a return statement.
+
+
+```python
+def other_function(): # signature
+    words = 'returned from inside the function body' # body
+    return words
+```
+
+
+```python
+other_function()
+```
+
+Much better.  So with the return statement we returned the string `'returned from inside the function body'`.
+
+> We will learn more on what is available from inside and outside of the function, so, don't worry if it feels a little confusing right now.
+
+### See it again
+
+Now let's identify the function signature and function body of our original function, `greet_empoyees()`.
+
+
+```python
+def greet_employees(): # function signature
+    welcome_messages = [] # begin function body
+    for new_employee in new_employees:
+        welcome_messages.append("Hi " + new_employee.title() + ", I'm so glad to be working with you!" )
+
+    return welcome_messages # return statement
+
+# no longer in function body
+```
+
+As you can see, `greet_employees` has the same components of a function we identified earlier: the function signature, the function body, and the return statement. Each time we call, `greet_employees()`, all of the lines in the body of the function are run.  However, only the return value is accessible from outside of the function.
+
+
+```python
+greet_employees()
+```
+
+### Summary
+
+In this section we saw how using a function allows us to reuse code without rewriting it.  We saw that to declare a function we first write the function signature, which consists of the `def` keyword, the function name, parentheses and a colon.  We indicate the body of the function by indenting our code and then writing the code that our function will execute.  To execute the function, we write the function's name followed by parentheses.  Executing the function will run the lines in the body of the function.
