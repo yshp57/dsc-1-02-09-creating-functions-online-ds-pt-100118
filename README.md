@@ -19,7 +19,7 @@ new_employees = ['jim', 'tracy', 'lisa']
 
 > Press shift + enter to run this code.
 
-We want to send each of them a nice welcoming message.  We could use a `for` loop to create a list of `welcome_messages`.
+We want to send each of them a nice welcome message.  We could use a `for` loop to create a list of `welcome_messages`.
 
 
 ```python
